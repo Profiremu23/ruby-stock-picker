@@ -1,7 +1,7 @@
 def stock_picker(array)
   result = Array.new
-  p buying_day = array[1]
-  p selling_day = array[4]
+  p buying_day = array.index(array.min)
+  p selling_day = array.index(array.max)
   p result.push(buying_day, selling_day)
 end
 
