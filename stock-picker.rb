@@ -10,8 +10,8 @@ def stock_picker(stock_array)
       selling_stock = stock_array[index]
     end
 
-    buying_day = buying_stock[index]
-    selling_day = selling_stock[index]
+    buying_day = stock_array.index(buying_stock)
+    selling_day = stock_array.index(selling_stock)
     max_profit = selling_stock - buying_stock
     
     #if selling_stock < buying_stock
@@ -32,7 +32,7 @@ def stock_picker(stock_array)
     #end
 
     result = Array.new
-    result.push(buying_day, selling_day)
+    p result.push(buying_day, selling_day)
   end
 end
 
