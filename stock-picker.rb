@@ -10,16 +10,6 @@ def stock_picker(stock_array)
   max_profit = 0
 
   stock_array.each_with_index do |price, index|
-    buying_stock = price
-    if buying_stock.nil?
-      buying_stock = price[index]
-    end
-    if purchasing_stock == 0 || buying_stock < purchasing_stock
-      purchasing_stock = buying_stock
-    else
-      purchasing_stock
-    end
-
     selling_stock = stock_array[index + 1]
     if selling_stock.nil?
       selling_stock = stock_array[index]
@@ -29,13 +19,23 @@ def stock_picker(stock_array)
     else
       selling_stock_value
     end
-
-    buying_day = stock_array.index(purchasing_stock)
     selling_day = stock_array.index(selling_stock_value)
+
+    buying_stock = price
+    if buying_stock.nil?
+      buying_stock = price[index]
+    end
+    if purchasing_stock == 0 || (buying_stock < purchasing_stock && stock_array.index(buying_stock) < (stock_array.index(purchasing_stock) && stock_array.index(selling_stock_value)))
+      purchasing_stock = buying_stock
+    else
+      purchasing_stock
+    end
+    buying_day = stock_array.index(purchasing_stock)
+
     max_profit = selling_stock - buying_stock
 
     result = Array.new
-    p result.push(buying_day, selling_day)
+    result.push(buying_day, selling_day)
   end
 end
 
