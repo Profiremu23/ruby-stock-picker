@@ -1,42 +1,36 @@
 def stock_picker(stock_array)
 
   #Initializing variables
-  buying_stock = 0
   purchasing_stock = 0
+  purchasing_day = 0
   selling_stock = 0
-  selling_stock_value = 0
-  buying_day = 0
   selling_day = 1
-  max_profit = 0
+  result = Array.new
 
-  stock_array.each_with_index do |price, index|
-    selling_stock = stock_array[index + 1]
-    if selling_stock.nil?
-      selling_stock = stock_array[index]
+  stock_array.each_with_index do |current_price, current_day|
+    # Getting the selling value and day
+    current_selling_value = stock_array[current_day + 1]
+    if current_selling_value.nil?
+      current_selling_value = stock_array[current_day]
     end
-    if selling_stock_value == 0 || selling_stock_value < selling_stock
-      selling_stock_value = selling_stock
+    if selling_stock == 0 || selling_stock < current_selling_value
+      selling_stock = current_selling_value
     else
-      selling_stock_value
+      selling_stock
     end
-    selling_day = stock_array.index(selling_stock_value)
+    selling_day = stock_array.index(selling_stock)
 
-    buying_stock = price
-    if buying_stock.nil?
-      buying_stock = price[index]
-    end
-    if purchasing_stock == 0 || (buying_stock < purchasing_stock && stock_array.index(buying_stock) < (stock_array.index(purchasing_stock) && stock_array.index(selling_stock_value)))
-      purchasing_stock = buying_stock
+    #Getting the purchasing value and day
+    if purchasing_stock == 0 || (current_price < purchasing_stock && stock_array.index(current_price) < (stock_array.index(purchasing_stock) && stock_array.index(selling_stock)))
+      purchasing_stock = current_price
     else
       purchasing_stock
     end
-    buying_day = stock_array.index(purchasing_stock)
+    purchasing_day = stock_array.index(purchasing_stock)
 
-    max_profit = selling_stock - buying_stock
-
-    result = Array.new
-    result.push(buying_day, selling_day)
   end
+  # Returning the result
+  p result.push(purchasing_day, selling_day)
 end
 
 stock_picker([7, 5, 6, 15, 17, 11, 3, 4, 8, 9])
