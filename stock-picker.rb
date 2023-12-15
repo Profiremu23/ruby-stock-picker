@@ -1,32 +1,32 @@
 def stock_picker(stock_array)
 
   #Initializing variables
-  purchasing_stock = 0
+  purchasing_price = 0
   purchasing_day = 0
-  selling_stock = 0
+  tomorrows_price = 0
   selling_day = 1
   result = Array.new
 
-  stock_array.each_with_index do |current_price, current_day|
+  stock_array.each_with_index do |todays_price, current_day|
     # Getting the selling value and day
     current_selling_value = stock_array[current_day + 1]
     if current_selling_value.nil?
       current_selling_value = stock_array[current_day]
     end
-    if selling_stock == 0 || selling_stock < current_selling_value
-      selling_stock = current_selling_value
+    if tomorrows_price == 0 || tomorrows_price < current_selling_value
+      tomorrows_price = current_selling_value
     else
-      selling_stock
+      tomorrows_price
     end
-    selling_day = stock_array.index(selling_stock)
+    selling_day = stock_array.index(tomorrows_price)
 
     #Getting the purchasing value and day
-    if purchasing_stock == 0 || (current_price < purchasing_stock && stock_array.index(current_price) < (stock_array.index(purchasing_stock) && stock_array.index(selling_stock)))
-      purchasing_stock = current_price
+    if purchasing_price == 0 || (todays_price < purchasing_price && stock_array.index(todays_price) < (stock_array.index(purchasing_price) && stock_array.index(tomorrows_price)))
+      purchasing_price = todays_price
     else
-      purchasing_stock
+      purchasing_price
     end
-    purchasing_day = stock_array.index(purchasing_stock)
+    purchasing_day = stock_array.index(purchasing_price)
 
   end
   # Returning the result
