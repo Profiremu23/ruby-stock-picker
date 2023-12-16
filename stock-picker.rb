@@ -33,4 +33,5 @@ def stock_picker(stock_array)
   p result.push(purchasing_day, selling_day)
 end
 
-stock_picker([7, 5, 6, 15, 17, 11, 3, 4, 8, 9])
+stock_picker([17,3,6,9,15,8,6,1,10]) #Stock array by the Odin Project
+stock_picker([7, 6, 5, 15, 17, 11, 3, 4, 8, 9]) #Custom stock array
